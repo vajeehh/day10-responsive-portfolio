@@ -15,6 +15,15 @@ document.getElementById("contactForm").addEventListener("submit", function (e) {
     let name = document.getElementById("name").value.trim();
     let email = document.getElementById("email").value.trim();
     let message = document.getElementById("message").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+    if (!name || !email || !phone || !message) {
+        formMessage.textContent = "Please fill in all fields.";
+        return;
+    }
+    if (!/^\d{10}$/.test(phone)) {
+        formMessage.textContent = "Please enter a valid 10-digit phone number.";
+        return;
+    }
     let msg = document.getElementById("formMessage");
 
     if (name === "" || email === "" || message === "") {
@@ -37,4 +46,10 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         document.querySelector(this.getAttribute("href"))
             .scrollIntoView({ behavior: "smooth" });
     });
+});
+
+const darkModeToggle = document.getElementById("darkModeToggle");
+
+darkModeToggle.addEventListener("click", () => {
+    document.body.classList.toggle("dark-mode");
 });
